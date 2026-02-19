@@ -106,15 +106,16 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-          <h1 className="text-2xl font-bold text-[#1a1a2e] mb-6 text-center">
-            Admin Login
+          <h1 className="text-2xl font-bold text-[#1a1a2e] mb-2 text-center">
+            Admin
           </h1>
+          <p className="text-gray-500 text-center mb-6">Enter password to continue</p>
           <form onSubmit={handleLogin}>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder="Password"
               className={`w-full px-4 py-3 border-2 rounded-lg mb-4 focus:outline-none focus:border-[#e5a527] ${
                 passwordError ? "border-red-500" : "border-gray-200"
               }`}
