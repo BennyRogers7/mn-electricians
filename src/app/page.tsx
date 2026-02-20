@@ -13,8 +13,16 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section with Chat */}
-      <section className="bg-gradient-to-br from-[#1a1a2e] via-[#232340] to-[#2d2d44] text-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="relative text-white py-12 md:py-16"
+        style={{
+          backgroundImage: "url('/images/hero-plumber.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e]/90 via-[#232340]/85 to-[#2d2d44]/90"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 tracking-tight">
               Find a Licensed Plumber in{" "}
@@ -96,8 +104,16 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1a1a2e] via-[#232340] to-[#2d2d44]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section
+        className="relative py-20"
+        style={{
+          backgroundImage: "url('/images/plumber-working.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e]/95 via-[#232340]/90 to-[#2d2d44]/95"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
             Are You a Plumber?
           </h2>

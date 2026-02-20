@@ -19,6 +19,9 @@ export default function ClaimListingPage() {
           <p className="text-gray-600 text-lg">
             Own a plumbing business in Minnesota? Claim your free listing to update your information, add photos, and get more customers.
           </p>
+          <p className="text-[#e85d04] font-medium mt-3">
+            Your business needs to be verified to be connected to customers.
+          </p>
         </div>
 
         <ClaimForm cities={cities} />

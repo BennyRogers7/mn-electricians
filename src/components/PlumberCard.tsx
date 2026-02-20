@@ -8,26 +8,9 @@ interface PlumberCardProps {
 
 export default function PlumberCard({ plumber }: PlumberCardProps) {
   return (
-    <div
-      className={`bg-white rounded-xl border-2 p-6 transition-all duration-200 ${
-        plumber.isFeatured
-          ? "border-[#e85d04] shadow-[0_4px_20px_rgba(232,93,4,0.15)]"
-          : "border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:border-[#e5a527]"
-      }`}
-    >
+    <div className="bg-white rounded-xl border-2 border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] hover:border-[#e5a527] p-6 transition-all duration-200">
       <div className="flex justify-between items-start mb-3">
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            {plumber.isFeatured && <span className="featured-badge">Featured</span>}
-            {plumber.isVerified && (
-              <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Verified
-              </span>
-            )}
-          </div>
           <Link href={`/profile/${plumber.slug}`}>
             <h3 className="text-xl font-bold text-[#1a1a2e] hover:text-[#e85d04] transition-colors">
               {plumber.name}
@@ -81,11 +64,7 @@ export default function PlumberCard({ plumber }: PlumberCardProps) {
             href={plumber.website}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-1 text-center py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${
-              plumber.isFeatured
-                ? "bg-[#1a1a2e] text-white hover:bg-[#2d2d44]"
-                : "border-2 border-[#1a1a2e] text-[#1a1a2e] hover:bg-[#1a1a2e] hover:text-white"
-            }`}
+            className="flex-1 text-center py-3 px-4 rounded-lg font-semibold transition-all duration-200 border-2 border-[#1a1a2e] text-[#1a1a2e] hover:bg-[#1a1a2e] hover:text-white"
           >
             Visit Website
           </a>

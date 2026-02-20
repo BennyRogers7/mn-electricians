@@ -113,19 +113,6 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           />
           <div className="flex items-start justify-between mt-4">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                {plumber.isFeatured && (
-                  <span className="featured-badge">Featured</span>
-                )}
-                {plumber.isVerified && (
-                  <span className="inline-flex items-center gap-1 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    Verified
-                  </span>
-                )}
-              </div>
               <h1 className="text-3xl md:text-4xl font-bold">{plumber.name}</h1>
               <p className="text-gray-300 mt-2">{plumber.address}</p>
               <div className="mt-3">
@@ -174,7 +161,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                   </div>
                 </div>
 
-                {plumber.isFeatured && plumber.website && (
+                {plumber.website && (
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-[#1a1a2e] rounded-lg flex items-center justify-center">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +185,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                 >
                   Call Now
                 </a>
-                {plumber.isFeatured && plumber.website && (
+                {plumber.website && (
                   <a
                     href={plumber.website}
                     target="_blank"
@@ -230,23 +217,21 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               </div>
             )}
 
-            {/* Upgrade CTA for non-featured */}
-            {!plumber.isFeatured && (
-              <div className="bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] rounded-xl p-6 text-white">
-                <h3 className="text-xl font-semibold mb-2">
-                  Is This Your Business?
-                </h3>
-                <p className="text-gray-300 mb-4">
-                  Claim this listing to add your website, upload photos, and get featured at the top of {plumber.city} searches.
-                </p>
-                <Link
-                  href="/claim-listing"
-                  className="inline-block bg-[#d4a853] text-[#1a1a2e] px-6 py-2 rounded-lg font-semibold hover:bg-[#e8c57b] transition-colors"
-                >
-                  Claim This Listing
-                </Link>
-              </div>
-            )}
+            {/* Claim CTA */}
+            <div className="bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] rounded-xl p-6 text-white">
+              <h3 className="text-xl font-semibold mb-2">
+                Is This Your Business?
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Claim this listing to update your information, add photos, and connect with more customers.
+              </p>
+              <Link
+                href="/claim-listing"
+                className="inline-block bg-[#d4a853] text-[#1a1a2e] px-6 py-2 rounded-lg font-semibold hover:bg-[#e8c57b] transition-colors"
+              >
+                Claim This Listing
+              </Link>
+            </div>
           </div>
 
           {/* Sidebar */}

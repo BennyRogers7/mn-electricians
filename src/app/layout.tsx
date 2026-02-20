@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "MN Plumbers Directory",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "MN Plumbers Directory - Find Licensed Plumbers in Minnesota",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "MN Plumbers Directory | Find Licensed Plumbers in Minnesota",
     description:
       "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities.",
-    images: ["/og-image.png"],
+    images: ["/images/og-image.png"],
   },
   alternates: {
     canonical: "/",
@@ -62,7 +62,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "MN Plumbers Directory",
   url: "https://mnplumb.com",
-  logo: "https://mnplumb.com/og-image.png",
+  logo: "https://mnplumb.com/images/og-image.png",
   description:
     "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities.",
   areaServed: {

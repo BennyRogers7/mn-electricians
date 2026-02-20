@@ -13,34 +13,9 @@ interface ChatResultsProps {
 
 function CompactPlumberCard({ plumber }: { plumber: Plumber }) {
   return (
-    <div
-      className={`bg-white rounded-xl border-2 p-4 transition-all duration-200 ${
-        plumber.isFeatured
-          ? 'border-[#e85d04] shadow-[0_4px_20px_rgba(232,93,4,0.15)]'
-          : 'border-gray-100 shadow-sm hover:shadow-md hover:border-[#e5a527]'
-      }`}
-    >
+    <div className="bg-white rounded-xl border-2 border-gray-100 shadow-sm hover:shadow-md hover:border-[#e5a527] p-4 transition-all duration-200">
       <div className="flex justify-between items-start mb-2">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1 flex-wrap">
-            {plumber.isFeatured && (
-              <span className="inline-flex items-center gap-1 bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-                Featured
-              </span>
-            )}
-            {plumber.isVerified && (
-              <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Verified
-              </span>
-            )}
-          </div>
           <h3 className="text-lg font-bold text-[#1a1a2e] truncate">{plumber.name}</h3>
           <p className="text-gray-600 text-sm truncate">{plumber.address}</p>
         </div>
