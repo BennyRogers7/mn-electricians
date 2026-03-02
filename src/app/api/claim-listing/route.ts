@@ -38,12 +38,12 @@ export async function POST(request: NextRequest) {
 
     // Send notification email
     const { error } = await resend.emails.send({
-      from: "MN Plumbers Directory <onboarding@resend.dev>",
-      to: process.env.NOTIFICATION_EMAIL || "hello@mnplumbers.com",
+      from: "MN Electricians Directory <onboarding@resend.dev>",
+      to: process.env.NOTIFICATION_EMAIL || "hello@mnelectricians.com",
       subject: `New Listing Claim: ${data.businessName}`,
       html: `
         <h2>New Listing Claim Request</h2>
-        <p>A new claim has been submitted for the MN Plumbers Directory.</p>
+        <p>A new claim has been submitted for the MN Electricians Directory.</p>
 
         <h3>Business Information</h3>
         <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         ` : ""}
 
         <hr style="margin: 24px 0; border: none; border-top: 1px solid #ddd;">
-        <p style="color: #666; font-size: 12px;">This email was sent from the MN Plumbers Directory claim form.</p>
+        <p style="color: #666; font-size: 12px;">This email was sent from the MN Electricians Directory claim form.</p>
       `,
     });
 

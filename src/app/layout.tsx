@@ -15,41 +15,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mnplumb.com"),
+  metadataBase: new URL("https://mnelectricians.com"),
   title: {
-    default: "MN Plumbers Directory | Find Licensed Plumbers in Minnesota",
-    template: "%s | MN Plumbers Directory",
+    default: "MN Electricians Directory | Find Licensed Electricians in Minnesota",
+    template: "%s | MN Electricians Directory",
   },
   description:
-    "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities. Read reviews, compare ratings, and get quotes from local plumbing professionals.",
+    "Find trusted, licensed electricians in Minnesota. Browse 670+ electricians across 62 cities. Read reviews, compare ratings, and get quotes from local electrical professionals.",
   keywords: [
-    "Minnesota plumbers",
-    "MN plumbers",
-    "plumbers near me",
-    "licensed plumbers Minnesota",
-    "plumbing services MN",
+    "Minnesota electricians",
+    "MN electricians",
+    "electricians near me",
+    "licensed electricians Minnesota",
+    "electrical services MN",
   ],
   openGraph: {
-    title: "MN Plumbers Directory | Find Licensed Plumbers in Minnesota",
+    title: "MN Electricians Directory | Find Licensed Electricians in Minnesota",
     description:
-      "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities.",
+      "Find trusted, licensed electricians in Minnesota. Browse 670+ electricians across 62 cities.",
     type: "website",
     locale: "en_US",
-    siteName: "MN Plumbers Directory",
+    siteName: "MN Electricians Directory",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "MN Plumbers Directory - Find Licensed Plumbers in Minnesota",
+        alt: "MN Electricians Directory - Find Licensed Electricians in Minnesota",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MN Plumbers Directory | Find Licensed Plumbers in Minnesota",
+    title: "MN Electricians Directory | Find Licensed Electricians in Minnesota",
     description:
-      "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities.",
+      "Find trusted, licensed electricians in Minnesota. Browse 670+ electricians across 62 cities.",
     images: ["/images/og-image.png"],
   },
   alternates: {
@@ -60,11 +60,11 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "MN Plumbers Directory",
-  url: "https://mnplumb.com",
-  logo: "https://mnplumb.com/images/og-image.png",
+  name: "MN Electricians Directory",
+  url: "https://mnelectricians.com",
+  logo: "https://mnelectricians.com/images/og-image.png",
   description:
-    "Find trusted, licensed plumbers in Minnesota. Browse 628+ plumbers across 62 cities.",
+    "Find trusted, licensed electricians in Minnesota. Browse 670+ electricians across 62 cities.",
   areaServed: {
     "@type": "State",
     name: "Minnesota",
@@ -76,11 +76,11 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "MN Plumbers Directory",
-  url: "https://mnplumb.com",
+  name: "MN Electricians Directory",
+  url: "https://mnelectricians.com",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://mnplumb.com/{city}",
+    target: "https://mnelectricians.com/{city}",
     "query-input": "required name=city",
   },
 };

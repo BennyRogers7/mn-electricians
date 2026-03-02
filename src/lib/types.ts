@@ -1,4 +1,4 @@
-export interface Plumber {
+export interface Electrician {
   id: string;
   name: string;
   phone: string;
@@ -31,16 +31,16 @@ export interface Service {
 }
 
 export const SERVICES: Service[] = [
-  { name: "Emergency Plumbing", slug: "emergency-plumbing", description: "24/7 emergency plumbing services for urgent repairs" },
-  { name: "Drain Cleaning", slug: "drain-cleaning", description: "Professional drain cleaning and clog removal" },
-  { name: "Water Heater Installation & Repair", slug: "water-heater", description: "Water heater installation, repair, and replacement" },
-  { name: "Sewer Line Repair", slug: "sewer-line-repair", description: "Sewer line inspection, repair, and replacement" },
-  { name: "Pipe Repair & Replacement", slug: "pipe-repair", description: "Pipe repair, replacement, and repiping services" },
-  { name: "Bathroom Plumbing", slug: "bathroom-plumbing", description: "Bathroom plumbing installation and repairs" },
-  { name: "Kitchen Plumbing", slug: "kitchen-plumbing", description: "Kitchen sink, disposal, and dishwasher plumbing" },
-  { name: "Water Softener Installation", slug: "water-softener", description: "Water softener and filtration system installation" },
-  { name: "Leak Detection & Repair", slug: "leak-detection", description: "Professional leak detection and repair services" },
-  { name: "Toilet Repair & Installation", slug: "toilet-repair", description: "Toilet repair, replacement, and installation" },
+  { name: "Panel Upgrades & Replacements", slug: "panel-upgrades", description: "Electrical panel upgrades, replacements, and 200-amp service installations" },
+  { name: "EV Charger Installation", slug: "ev-charger-installation", description: "Electric vehicle charger installation for home and commercial properties" },
+  { name: "Generator Installation", slug: "generator-installation", description: "Whole-home and standby generator installation and maintenance" },
+  { name: "Lighting Installation", slug: "lighting-installation", description: "Indoor and outdoor lighting installation, recessed lighting, and LED upgrades" },
+  { name: "Emergency Electrician", slug: "emergency-electrician", description: "24/7 emergency electrical services for urgent repairs" },
+  { name: "Outlet & Switch Installation", slug: "outlet-switch-installation", description: "Electrical outlet, switch, and GFCI installation and repair" },
+  { name: "Ceiling Fan Installation", slug: "ceiling-fan-installation", description: "Ceiling fan installation, replacement, and wiring" },
+  { name: "Home Rewiring", slug: "home-rewiring", description: "Complete home rewiring and electrical system upgrades" },
+  { name: "Smoke & Carbon Monoxide Detectors", slug: "smoke-detectors", description: "Smoke detector and carbon monoxide alarm installation" },
+  { name: "Commercial Electrical Services", slug: "commercial-electrical", description: "Commercial electrical installation, maintenance, and repairs" },
 ];
 
 // Chat-related types

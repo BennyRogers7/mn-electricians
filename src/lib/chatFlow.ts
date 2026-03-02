@@ -27,42 +27,48 @@ function getEmpatheticResponse(issue: string): string {
   const lower = issue.toLowerCase();
 
   // Emergency/urgent situations
-  if (lower.includes('flood') || lower.includes('flooding')) {
-    return "Oh no, flooding is so stressful! Let me help you find someone right away.";
+  if (lower.includes('no power') || lower.includes('power out')) {
+    return "Being without power is really stressful! Let me help you find someone right away.";
   }
-  if (lower.includes('burst') || lower.includes('broken pipe')) {
-    return "A burst pipe is never fun - I'm sorry you're dealing with that. Let's get you help fast.";
+  if (lower.includes('sparks') || lower.includes('sparking') || lower.includes('burning smell')) {
+    return "That sounds serious - electrical sparks or burning smells need immediate attention. Let's get you help fast.";
   }
-  if (lower.includes('no water') || lower.includes('no hot water')) {
-    return "Being without water is really tough. I'll help you find someone who can fix this.";
+  if (lower.includes('shock') || lower.includes('shocked')) {
+    return "Electrical shocks are scary and dangerous. I'm on it - let's find you help.";
   }
-  if (lower.includes('sewage') || lower.includes('sewer') || lower.includes('backup')) {
-    return "Ugh, sewer issues are the worst. I'm on it - let's find you help.";
+  if (lower.includes('fire') || lower.includes('smoke')) {
+    return "Safety first - if there's active fire or smoke, please call 911. Otherwise, let me help you find an electrician.";
   }
 
   // Common issues
-  if (lower.includes('leak') || lower.includes('leaking') || lower.includes('drip')) {
-    return "Leaks can be such a headache. Let me help you find someone to take care of it.";
+  if (lower.includes('outlet') || lower.includes('plug') || lower.includes('socket')) {
+    return "Outlet issues can be frustrating! Let me help you find someone to take care of it.";
   }
-  if (lower.includes('clog') || lower.includes('drain') || lower.includes('blocked')) {
-    return "Clogged drains are so frustrating! I'll help you find the right person for this.";
+  if (lower.includes('breaker') || lower.includes('panel') || lower.includes('fuse')) {
+    return "Breaker and panel issues need a pro. I'll help you find the right person for this.";
   }
-  if (lower.includes('toilet')) {
-    return "Toilet troubles are never convenient. Let's get you connected with someone who can help.";
+  if (lower.includes('light') || lower.includes('lighting') || lower.includes('fixture')) {
+    return "Lighting problems are so inconvenient. Let's get you connected with someone who can help.";
   }
-  if (lower.includes('water heater') || lower.includes('hot water')) {
-    return "Water heater issues can really disrupt your day. I'll find you some good options.";
+  if (lower.includes('ev charger') || lower.includes('electric vehicle') || lower.includes('car charger')) {
+    return "Great choice going electric! I'll find you an electrician who specializes in EV charger installation.";
   }
-  if (lower.includes('faucet') || lower.includes('sink')) {
-    return "Got it! Let me find you a plumber who can take care of that.";
+  if (lower.includes('generator')) {
+    return "Smart thinking with a generator! Let me find you some good options for installation.";
+  }
+  if (lower.includes('ceiling fan') || lower.includes('fan')) {
+    return "Got it! Let me find you an electrician who can take care of that.";
+  }
+  if (lower.includes('rewire') || lower.includes('rewiring') || lower.includes('old wiring')) {
+    return "Updating old wiring is important for safety. I'll find you some great options.";
   }
 
   // Generic empathetic responses
   const genericResponses = [
-    "I hear you - plumbing problems are never fun. Let me help you find the right person.",
+    "I hear you - electrical problems can be worrying. Let me help you find the right person.",
     "Thanks for sharing that. Let me connect you with someone who can help.",
     "Got it! I'll find you some great options to get this fixed.",
-    "No problem - I'm here to help. Let me find the right plumber for you.",
+    "No problem - I'm here to help. Let me find the right electrician for you.",
   ];
 
   return genericResponses[Math.floor(Math.random() * genericResponses.length)];
@@ -82,9 +88,10 @@ const LOCATION_QUESTIONS = [
   "And what's your city?",
 ];
 
-// Searching messages
+// Searching messages (reserved for future use)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SEARCHING_MESSAGES = [
-  "Perfect! Let me find the best plumbers near you...",
+  "Perfect! Let me find the best electricians near you...",
   "Great - searching for top-rated pros in your area...",
   "On it! Finding the best matches...",
 ];
@@ -122,7 +129,6 @@ function isEmergencyResponse(text: string): boolean | null {
 }
 
 // Minnesota zip code to city/neighborhood mapping
-// Minneapolis/St. Paul proper map to neighborhoods, suburbs map to corrected city names
 const ZIP_TO_CITY: Record<string, string> = {
   // Minneapolis neighborhoods
   '55413': 'Minneapolis Northeast', '55414': 'Minneapolis Northeast', '55418': 'Minneapolis Northeast',
@@ -138,7 +144,7 @@ const ZIP_TO_CITY: Record<string, string> = {
   '55104': 'St. Paul Hamline-University', '55105': 'St. Paul Hamline-University',
   '55103': 'St. Paul East Side', '55106': 'St. Paul East Side', '55119': 'St. Paul East Side', '55130': 'St. Paul East Side',
   '55107': 'St. Paul West Side',
-  // Suburbs (corrected from Minneapolis/St. Paul)
+  // Suburbs
   '55449': 'Plymouth', '55441': 'Plymouth', '55447': 'Plymouth',
   '55428': 'Crystal', '55429': 'Crystal',
   '55426': 'St. Louis Park',
@@ -156,7 +162,6 @@ const ZIP_TO_CITY: Record<string, string> = {
   '55125': 'Woodbury', '55128': 'Woodbury', '55129': 'Woodbury',
   '55127': 'Vadnais Heights',
   '55042': 'Lake Elmo', '55055': 'Stillwater',
-  // Additional suburbs
   '55443': 'Brooklyn Park', '55444': 'Brooklyn Park', '55445': 'Brooklyn Park',
   '55430': 'Brooklyn Center',
   '55442': 'Plymouth', '55446': 'Plymouth',
@@ -170,7 +175,6 @@ const ZIP_TO_CITY: Record<string, string> = {
   '55311': 'Maple Grove',
   '55303': 'Anoka',
   '55424': 'Edina', '55425': 'Bloomington', '55435': 'Edina', '55436': 'Edina', '55439': 'Edina',
-  // Saint Paul area suburbs
   '55109': 'Maplewood',
   '55038': 'Hugo',
   '55068': 'Rosemount',
@@ -190,7 +194,7 @@ const ZIP_TO_CITY: Record<string, string> = {
   // Rochester area
   '55901': 'Rochester', '55902': 'Rochester', '55903': 'Rochester', '55904': 'Rochester',
   '55905': 'Rochester', '55906': 'Rochester',
-  // Other major cities (non-duplicates)
+  // Other major cities
   '56301': 'Saint Cloud', '56302': 'Saint Cloud', '56303': 'Saint Cloud', '56304': 'Saint Cloud',
   '55060': 'Owatonna', '55057': 'Northfield', '55082': 'Stillwater', '55379': 'Shakopee',
   '55306': 'Burnsville', '55318': 'Chanhassen', '55317': 'Chanhassen', '55345': 'Minnetonka',
@@ -234,14 +238,12 @@ function findCity(input: string, cities: City[]): City | null {
     'stpaul': 'saint paul',
     'st paul': 'saint paul',
     'st. paul': 'saint paul',
-    // Minneapolis neighborhood aliases
     'northeast minneapolis': 'minneapolis northeast',
     'ne minneapolis': 'minneapolis northeast',
     'downtown minneapolis': 'minneapolis downtown',
     'uptown minneapolis': 'minneapolis uptown',
     'south minneapolis': 'minneapolis south',
     'southwest minneapolis': 'minneapolis southwest',
-    // St. Paul neighborhood aliases
     'downtown st paul': 'st. paul downtown',
     'downtown saint paul': 'st. paul downtown',
     'highland park': 'st. paul highland',
@@ -274,7 +276,7 @@ function findCity(input: string, cities: City[]): City | null {
 export function createInitialState(): ChatState {
   return {
     step: 'welcome',
-    messages: [], // Start empty - user types first
+    messages: [],
     intent: {},
   };
 }
@@ -303,7 +305,6 @@ export function processUserInput(
 
   switch (state.step) {
     case 'welcome':
-      // User described their issue - respond with empathy
       if (trimmedInput.length < 3) {
         botResponse = "Could you tell me a bit more about what's going on?";
       } else {
@@ -322,7 +323,7 @@ export function processUserInput(
         newIntent.isEmergency = isEmergency;
         nextStep = 'location';
         if (isEmergency) {
-          botResponse = `Okay, I'll prioritize plumbers who offer emergency service. ${pickRandom(LOCATION_QUESTIONS)}`;
+          botResponse = `Okay, I'll prioritize electricians who offer emergency service. ${pickRandom(LOCATION_QUESTIONS)}`;
         } else {
           botResponse = `No rush - got it. ${pickRandom(LOCATION_QUESTIONS)}`;
         }
@@ -335,20 +336,17 @@ export function processUserInput(
         newIntent.city = matchedCity.name;
         newIntent.citySlug = matchedCity.slug;
         nextStep = 'results';
-        // Repeat the problem back in the results message
-        const issue = newIntent.issue || 'your plumbing issue';
+        const issue = newIntent.issue || 'your electrical issue';
         const urgencyNote = newIntent.isEmergency ? ' who offer emergency service' : '';
-        botResponse = `Got it - "${issue}" in ${matchedCity.name}. Let me find the best plumbers${urgencyNote} for you...`;
+        botResponse = `Got it - "${issue}" in ${matchedCity.name}. Let me find the best electricians${urgencyNote} for you...`;
         showResults = true;
       } else {
-        // Ask for zip code instead of guessing
         botResponse = pickRandom(ZIP_CODE_REQUESTS);
       }
       break;
 
     case 'results':
     case 'followup':
-      // User wants to search again
       newIntent.issue = trimmedInput;
       newIntent.isEmergency = undefined;
       newIntent.city = undefined;

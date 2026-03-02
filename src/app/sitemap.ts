@@ -1,13 +1,13 @@
 import { MetadataRoute } from "next";
-import { getAllPlumbers, getAllCities } from "@/lib/data";
+import { getAllElectricians, getAllCities } from "@/lib/data";
 import { SERVICES } from "@/lib/types";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mnplumb.com";
+  const baseUrl = "https://mnelectricians.com";
 
-  const plumbers = getAllPlumbers();
+  const electricians = getAllElectricians();
   const cities = getAllCities();
 
   // Static pages
@@ -42,13 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Plumber profile pages
-  const plumberPages: MetadataRoute.Sitemap = plumbers.map((plumber) => ({
-    url: `${baseUrl}/profile/${plumber.slug}`,
+  // Electrician profile pages
+  const electricianPages: MetadataRoute.Sitemap = electricians.map((electrician) => ({
+    url: `${baseUrl}/profile/${electrician.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  return [...staticPages, ...cityPages, ...servicePages, ...plumberPages];
+  return [...staticPages, ...cityPages, ...servicePages, ...electricianPages];
 }

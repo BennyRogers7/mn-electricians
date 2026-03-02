@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPlumbers, getAllCities } from "@/lib/data";
+import { getAllElectricians, getAllCities } from "@/lib/data";
 import { SERVICES } from "@/lib/types";
-import PlumberCard from "@/components/PlumberCard";
+import ElectricianCard from "@/components/ElectricianCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import WebsimpleCTA from "@/components/WebsimpleCTA";
 
@@ -32,11 +32,11 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   return {
-    title: `${service.name} in Minnesota - Find Local Plumbers`,
-    description: `Find Minnesota plumbers specializing in ${service.name.toLowerCase()}. ${service.description}. Compare ratings and get quotes from licensed professionals.`,
+    title: `${service.name} in Minnesota - Find Local Electricians`,
+    description: `Find Minnesota electricians specializing in ${service.name.toLowerCase()}. ${service.description}. Compare ratings and get quotes from licensed professionals.`,
     openGraph: {
       title: `${service.name} in Minnesota`,
-      description: `Find Minnesota plumbers specializing in ${service.name.toLowerCase()}.`,
+      description: `Find Minnesota electricians specializing in ${service.name.toLowerCase()}.`,
     },
     alternates: {
       canonical: `/services/${service.slug}`,
@@ -52,11 +52,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  const allPlumbers = getAllPlumbers();
+  const allElectricians = getAllElectricians();
   const cities = getAllCities();
 
-  // For service pages, show all plumbers sorted by rating
-  const plumbers = allPlumbers.sort((a, b) => {
+  const electricians = allElectricians.sort((a, b) => {
     if (a.isFeatured && !b.isFeatured) return -1;
     if (!a.isFeatured && b.isFeatured) return 1;
     return (b.rating || 0) - (a.rating || 0);
@@ -65,7 +64,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] text-white py-12">
+      <section className="bg-gradient-to-br from-[#1e3a5f] to-[#2d4a6f] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
@@ -75,10 +74,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
             ]}
           />
           <h1 className="text-3xl md:text-4xl font-bold mt-4">
-            <span className="text-[#d4a853]">{service.name}</span> in Minnesota
+            <span className="text-[#f7c948]">{service.name}</span> in Minnesota
           </h1>
           <p className="text-gray-300 mt-2 max-w-2xl">
-            {service.description}. Browse {plumbers.length} Minnesota plumbers who can help with your {service.name.toLowerCase()} needs.
+            {service.description}. Browse {electricians.length} Minnesota electricians who can help with your {service.name.toLowerCase()} needs.
           </p>
         </div>
       </section>
@@ -89,26 +88,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
           {/* Listings */}
           <div className="lg:col-span-2">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-[#1a1a2e]">
-                {service.name} Plumbers
+              <h2 className="text-xl font-semibold text-[#1e3a5f]">
+                {service.name} Electricians
               </h2>
               <span className="text-gray-500 text-sm">
-                {plumbers.length} results
+                {electricians.length} results
               </span>
             </div>
             <div className="space-y-4">
-              {plumbers.slice(0, 20).map((plumber) => (
-                <PlumberCard key={plumber.id} plumber={plumber} />
+              {electricians.slice(0, 20).map((electrician) => (
+                <ElectricianCard key={electrician.id} electrician={electrician} />
               ))}
             </div>
-            {plumbers.length > 20 && (
+            {electricians.length > 20 && (
               <div className="mt-6 text-center">
                 <p className="text-gray-600">
-                  Showing 20 of {plumbers.length} plumbers.{" "}
-                  <Link href="/#cities" className="text-[#d4a853] hover:underline">
+                  Showing 20 of {electricians.length} electricians.{" "}
+                  <Link href="/#cities" className="text-[#f7c948] hover:underline">
                     Browse by city
                   </Link>{" "}
-                  to see all plumbers in your area.
+                  to see all electricians in your area.
                 </p>
               </div>
             )}
@@ -120,7 +119,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             {/* Browse by City */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-[#1a1a2e] mb-4">
+              <h3 className="text-lg font-semibold text-[#1e3a5f] mb-4">
                 Browse by City
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -128,7 +127,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   <Link
                     key={city.slug}
                     href={`/${city.slug}`}
-                    className="text-sm bg-gray-100 hover:bg-[#d4a853] hover:text-[#1a1a2e] px-3 py-1 rounded-full transition-colors"
+                    className="text-sm bg-gray-100 hover:bg-[#f7c948] hover:text-[#1e3a5f] px-3 py-1 rounded-full transition-colors"
                   >
                     {city.name}
                   </Link>
@@ -136,7 +135,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               </div>
               <Link
                 href="/#cities"
-                className="block mt-4 text-sm text-[#d4a853] hover:underline"
+                className="block mt-4 text-sm text-[#f7c948] hover:underline"
               >
                 View all {cities.length} cities &rarr;
               </Link>
@@ -144,7 +143,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             {/* Other Services */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-[#1a1a2e] mb-4">
+              <h3 className="text-lg font-semibold text-[#1e3a5f] mb-4">
                 Other Services
               </h3>
               <ul className="space-y-2">
@@ -154,7 +153,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     <li key={s.slug}>
                       <Link
                         href={`/services/${s.slug}`}
-                        className="text-sm text-gray-600 hover:text-[#d4a853]"
+                        className="text-sm text-gray-600 hover:text-[#f7c948]"
                       >
                         {s.name}
                       </Link>
@@ -178,19 +177,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://mnplumb.com",
+                item: "https://mnelectricians.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Services",
-                item: "https://mnplumb.com/#services",
+                item: "https://mnelectricians.com/#services",
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: service.name,
-                item: `https://mnplumb.com/services/${service.slug}`,
+                item: `https://mnelectricians.com/services/${service.slug}`,
               },
             ],
           }),
@@ -213,8 +212,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
             },
             provider: {
               "@type": "Organization",
-              name: "MN Plumbers Directory",
-              url: "https://mnplumb.com",
+              name: "MN Electricians Directory",
+              url: "https://mnelectricians.com",
             },
           }),
         }}

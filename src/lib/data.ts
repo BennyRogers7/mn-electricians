@@ -1,16 +1,13 @@
 import { readFileSync } from "fs";
 import path from "path";
-import { Plumber, City } from "./types";
+import { Electrician, City } from "./types";
 import {
   extractZipFromAddress,
   resolveCityFromZip,
-  generateLocationSlug,
   getAllNeighborhoods,
-  MINNEAPOLIS_ZIPS,
-  ST_PAUL_ZIPS,
 } from "./zipConfig";
 
-// Load featured plumbers from JSON file
+// Load featured electricians from JSON file
 function loadFeaturedSlugs(): Set<string> {
   try {
     const featuredPath = path.join(process.cwd(), "src/data/featured.json");
@@ -22,7 +19,7 @@ function loadFeaturedSlugs(): Set<string> {
   }
 }
 
-// Load verified plumbers from JSON file
+// Load verified electricians from JSON file
 function loadVerifiedSlugs(): Set<string> {
   try {
     const verifiedPath = path.join(process.cwd(), "src/data/verified.json");
@@ -34,8 +31,8 @@ function loadVerifiedSlugs(): Set<string> {
   }
 }
 
-const FEATURED_PLUMBER_SLUGS = loadFeaturedSlugs();
-const VERIFIED_PLUMBER_SLUGS = loadVerifiedSlugs();
+const FEATURED_ELECTRICIAN_SLUGS = loadFeaturedSlugs();
+const VERIFIED_ELECTRICIAN_SLUGS = loadVerifiedSlugs();
 
 function generateSlug(name: string): string {
   return name
@@ -53,13 +50,13 @@ function generateCitySlug(city: string): string {
     .replace(/[^a-z0-9-]/g, "");
 }
 
-function parseCSV(): Plumber[] {
-  const csvPath = path.join(process.cwd(), "src/data/plumbers.csv");
+function parseCSV(): Electrician[] {
+  const csvPath = path.join(process.cwd(), "src/data/electricians.csv");
   const content = readFileSync(csvPath, "utf-8");
   const lines = content.split("\n").filter((line) => line.trim());
   const headers = lines[0].split(",").map((h) => h.trim());
 
-  const plumbers: Plumber[] = [];
+  const electricians: Electrician[] = [];
 
   for (let i = 1; i < lines.length; i++) {
     const values: string[] = [];
@@ -86,6 +83,7 @@ function parseCSV(): Plumber[] {
     const name = row.name || "";
     if (!name) continue;
 
+    // Services column may not exist in electricians CSV
     const services = row.services
       ? row.services.split(",").map((s) => s.trim()).filter(Boolean)
       : [];
@@ -107,8 +105,8 @@ function parseCSV(): Plumber[] {
       neighborhood = resolution.neighborhood;
     }
 
-    plumbers.push({
-      id: `plumber-${i}`,
+    electricians.push({
+      id: `electrician-${i}`,
       name,
       phone: row.phone || "",
       address,
@@ -119,29 +117,29 @@ function parseCSV(): Plumber[] {
       email: row.email || null,
       rating: row.rating ? parseFloat(row.rating) : null,
       slug,
-      isFeatured: FEATURED_PLUMBER_SLUGS.has(slug),
-      isVerified: VERIFIED_PLUMBER_SLUGS.has(slug),
+      isFeatured: FEATURED_ELECTRICIAN_SLUGS.has(slug),
+      isVerified: VERIFIED_ELECTRICIAN_SLUGS.has(slug),
       zipCode: zipCode || undefined,
       neighborhood,
     });
   }
 
-  return plumbers;
+  return electricians;
 }
 
-let cachedPlumbers: Plumber[] | null = null;
+let cachedElectricians: Electrician[] | null = null;
 
-export function getAllPlumbers(): Plumber[] {
-  if (!cachedPlumbers) {
-    cachedPlumbers = parseCSV();
+export function getAllElectricians(): Electrician[] {
+  if (!cachedElectricians) {
+    cachedElectricians = parseCSV();
   }
-  return cachedPlumbers;
+  return cachedElectricians;
 }
 
-export function getPlumbersByCity(citySlug: string): Plumber[] {
-  const plumbers = getAllPlumbers();
-  return plumbers.filter(
-    (p) => generateCitySlug(p.city) === citySlug
+export function getElectriciansByCity(citySlug: string): Electrician[] {
+  const electricians = getAllElectricians();
+  return electricians.filter(
+    (e) => generateCitySlug(e.city) === citySlug
   ).sort((a, b) => {
     // Featured first, then by rating
     if (a.isFeatured && !b.isFeatured) return -1;
@@ -150,21 +148,20 @@ export function getPlumbersByCity(citySlug: string): Plumber[] {
   });
 }
 
-export function getPlumberBySlug(slug: string): Plumber | undefined {
-  const plumbers = getAllPlumbers();
-  return plumbers.find((p) => p.slug === slug);
+export function getElectricianBySlug(slug: string): Electrician | undefined {
+  const electricians = getAllElectricians();
+  return electricians.find((e) => e.slug === slug);
 }
 
 export function getAllCities(): City[] {
-  const plumbers = getAllPlumbers();
+  const electricians = getAllElectricians();
   const cityMap = new Map<string, { name: string; count: number; isNeighborhood: boolean; parentCity?: string }>();
 
   // Get all neighborhoods for reference
   const neighborhoods = getAllNeighborhoods();
-  const neighborhoodSlugs = new Set(neighborhoods.map(n => n.slug));
 
-  plumbers.forEach((p) => {
-    const slug = generateCitySlug(p.city);
+  electricians.forEach((e) => {
+    const slug = generateCitySlug(e.city);
     const existing = cityMap.get(slug);
 
     // Check if this is a neighborhood
@@ -176,7 +173,7 @@ export function getAllCities(): City[] {
       existing.count++;
     } else {
       cityMap.set(slug, {
-        name: p.city,
+        name: e.city,
         count: 1,
         isNeighborhood,
         parentCity,
@@ -199,29 +196,29 @@ export function getCityBySlug(slug: string): City | undefined {
   return getAllCities().find((c) => c.slug === slug);
 }
 
-export function getTotalPlumbersCount(): number {
-  return getAllPlumbers().length;
+export function getTotalElectriciansCount(): number {
+  return getAllElectricians().length;
 }
 
-export function getNoWebsitePlumbers(): Plumber[] {
-  return getAllPlumbers().filter((p) => !p.website);
+export function getNoWebsiteElectricians(): Electrician[] {
+  return getAllElectricians().filter((e) => !e.website);
 }
 
-// Get plumbers by ZIP code
-export function getPlumbersByZip(zip: string): Plumber[] {
-  const plumbers = getAllPlumbers();
-  return plumbers.filter((p) => p.zipCode === zip).sort((a, b) => {
+// Get electricians by ZIP code
+export function getElectriciansByZip(zip: string): Electrician[] {
+  const electricians = getAllElectricians();
+  return electricians.filter((e) => e.zipCode === zip).sort((a, b) => {
     if (a.isFeatured && !b.isFeatured) return -1;
     if (!a.isFeatured && b.isFeatured) return 1;
     return (b.rating || 0) - (a.rating || 0);
   });
 }
 
-// Get plumbers by multiple ZIP codes (for neighborhoods)
-export function getPlumbersByZips(zips: string[]): Plumber[] {
+// Get electricians by multiple ZIP codes (for neighborhoods)
+export function getElectriciansByZips(zips: string[]): Electrician[] {
   const zipSet = new Set(zips);
-  const plumbers = getAllPlumbers();
-  return plumbers.filter((p) => p.zipCode && zipSet.has(p.zipCode)).sort((a, b) => {
+  const electricians = getAllElectricians();
+  return electricians.filter((e) => e.zipCode && zipSet.has(e.zipCode)).sort((a, b) => {
     if (a.isFeatured && !b.isFeatured) return -1;
     if (!a.isFeatured && b.isFeatured) return 1;
     return (b.rating || 0) - (a.rating || 0);

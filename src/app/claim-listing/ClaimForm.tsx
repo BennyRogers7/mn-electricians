@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { City, SERVICES } from "@/lib/types";
 
 interface ClaimFormProps {
@@ -82,16 +83,16 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-[#1a1a2e] mb-4">Claim Submitted!</h2>
+        <h2 className="text-2xl font-bold text-[#1e3a5f] mb-4">Claim Submitted!</h2>
         <p className="text-gray-600 mb-6">
-          Thank you for submitting your claim. We'll review your information and get back to you within 1-2 business days.
+          Thank you for submitting your claim. We&apos;ll review your information and get back to you within 1-2 business days.
         </p>
-        <a
+        <Link
           href="/"
-          className="inline-block bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
+          className="inline-block bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all"
         >
           Back to Home
-        </a>
+        </Link>
       </div>
     );
   }
@@ -100,7 +101,7 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
     <div className="bg-white rounded-2xl shadow-lg p-8">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="businessName" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="businessName" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             Business Name *
           </label>
           <input
@@ -110,13 +111,13 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             required
             value={formData.businessName}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
             placeholder="Your Plumbing Company"
           />
         </div>
 
         <div>
-          <label htmlFor="ownerName" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="ownerName" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             Your Name *
           </label>
           <input
@@ -126,14 +127,14 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             required
             value={formData.ownerName}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
             placeholder="John Smith"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+            <label htmlFor="email" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
               Email Address *
             </label>
             <input
@@ -143,13 +144,13 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+            <label htmlFor="phone" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
               Phone Number *
             </label>
             <input
@@ -159,14 +160,14 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
               required
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
               placeholder="(555) 123-4567"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="city" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="city" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             City *
           </label>
           <select
@@ -175,7 +176,7 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             required
             value={formData.city}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all bg-white"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all bg-white"
           >
             <option value="">Select your city</option>
             {cities.map((city) => (
@@ -187,7 +188,7 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
         </div>
 
         <div>
-          <label htmlFor="address" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="address" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             Business Address
           </label>
           <input
@@ -196,13 +197,13 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             name="address"
             value={formData.address}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
             placeholder="123 Main St, Minneapolis, MN 55401"
           />
         </div>
 
         <div>
-          <label htmlFor="website" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="website" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             Website
           </label>
           <input
@@ -211,26 +212,26 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             name="website"
             value={formData.website}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
             placeholder="https://yourwebsite.com"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-[#1a1a2e] mb-3">
+          <label className="block text-sm font-semibold text-[#1e3a5f] mb-3">
             Services Offered
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {SERVICES.map((service) => (
               <label
                 key={service.slug}
-                className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-[#e5a527] transition-colors"
+                className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-[#f7c948] transition-colors"
               >
                 <input
                   type="checkbox"
                   checked={formData.services.includes(service.name)}
                   onChange={() => handleServiceToggle(service.name)}
-                  className="w-5 h-5 text-[#e85d04] border-gray-300 rounded focus:ring-[#e5a527]"
+                  className="w-5 h-5 text-[#2563eb] border-gray-300 rounded focus:ring-[#f7c948]"
                 />
                 <span className="text-sm text-gray-700">{service.name}</span>
               </label>
@@ -246,14 +247,14 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
               name="otherServices"
               value={formData.otherServices}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all"
               placeholder="Gas line repair, Sump pump installation, etc."
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-semibold text-[#1a1a2e] mb-2">
+          <label htmlFor="message" className="block text-sm font-semibold text-[#1e3a5f] mb-2">
             Additional Information
           </label>
           <textarea
@@ -262,7 +263,7 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
             rows={4}
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#e5a527] focus:border-transparent transition-all resize-none"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all resize-none"
             placeholder="Tell us about your business, years in operation, etc."
           />
         </div>
@@ -276,7 +277,7 @@ export default function ClaimForm({ cities }: ClaimFormProps) {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {status === "loading" ? "Submitting..." : "Submit Claim"}
         </button>

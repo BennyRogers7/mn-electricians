@@ -1,7 +1,7 @@
-import { Plumber, UserIntent } from './types';
+import { Electrician, UserIntent } from './types';
 
 export interface MatchResult {
-  plumbers: Plumber[];
+  electricians: Electrician[];
   matchedService: string | null;
   city: string;
 }
@@ -9,8 +9,8 @@ export interface MatchResult {
 // Keywords that indicate emergency services
 const EMERGENCY_KEYWORDS = ['emergency', '24/7', '24 hour', 'urgent', '24-hour'];
 
-function plumberOffersEmergency(plumber: Plumber): boolean {
-  const servicesText = plumber.services.map((s) => s.toLowerCase()).join(' ');
+function electricianOffersEmergency(electrician: Electrician): boolean {
+  const servicesText = electrician.services.map((s) => s.toLowerCase()).join(' ');
   return EMERGENCY_KEYWORDS.some((keyword) => servicesText.includes(keyword.toLowerCase()));
 }
 
@@ -22,8 +22,8 @@ function generateCitySlug(city: string): string {
 }
 
 // Sort: featured first, then by rating (Google reviews)
-function comparePlumbers(a: Plumber, b: Plumber): number {
-  // Featured plumbers always first
+function compareElectricians(a: Electrician, b: Electrician): number {
+  // Featured electricians always first
   if (a.isFeatured && !b.isFeatured) return -1;
   if (!a.isFeatured && b.isFeatured) return 1;
 
@@ -39,9 +39,9 @@ function comparePlumbers(a: Plumber, b: Plumber): number {
   return 0;
 }
 
-export function matchPlumbers(
+export function matchElectricians(
   intent: UserIntent,
-  allPlumbers: Plumber[],
+  allElectricians: Electrician[],
   limit = 8
 ): MatchResult {
   const citySlug = intent.citySlug;
@@ -49,33 +49,33 @@ export function matchPlumbers(
 
   if (!citySlug) {
     return {
-      plumbers: [],
+      electricians: [],
       matchedService: null,
       city: '',
     };
   }
 
-  // Filter plumbers by city
-  let plumbers = allPlumbers.filter(
-    (p) => generateCitySlug(p.city) === citySlug
+  // Filter electricians by city
+  let electricians = allElectricians.filter(
+    (e) => generateCitySlug(e.city) === citySlug
   );
 
-  // If emergency, filter to only plumbers offering emergency services
+  // If emergency, filter to only electricians offering emergency services
   if (intent.isEmergency) {
-    const emergencyPlumbers = plumbers.filter(plumberOffersEmergency);
-    // Only filter if we have emergency plumbers, otherwise show all
-    if (emergencyPlumbers.length > 0) {
-      plumbers = emergencyPlumbers;
+    const emergencyElectricians = electricians.filter(electricianOffersEmergency);
+    // Only filter if we have emergency electricians, otherwise show all
+    if (emergencyElectricians.length > 0) {
+      electricians = emergencyElectricians;
     }
   }
 
   // Sort: featured first, then by rating
-  plumbers.sort(comparePlumbers);
+  electricians.sort(compareElectricians);
 
   // Return top matches
   return {
-    plumbers: plumbers.slice(0, limit),
-    matchedService: intent.isEmergency ? 'Emergency Plumbing' : null,
+    electricians: electricians.slice(0, limit),
+    matchedService: intent.isEmergency ? 'Emergency Electrical' : null,
     city,
   };
 }

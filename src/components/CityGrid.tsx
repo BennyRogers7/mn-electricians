@@ -12,10 +12,10 @@ export default function CityGrid({ cities }: CityGridProps) {
         <Link
           key={city.slug}
           href={`/${city.slug}`}
-          className="bg-white border-2 border-gray-100 rounded-xl p-5 hover:border-[#e5a527] hover:shadow-lg transition-all duration-200 text-center group"
+          className="bg-white border-2 border-gray-100 rounded-xl p-5 hover:border-[#f7c948] hover:shadow-lg transition-all duration-200 text-center group"
         >
-          <h3 className="font-bold text-[#1a1a2e] group-hover:text-[#e85d04] transition-colors">{city.name}</h3>
-          <p className="text-sm text-gray-500 font-medium">{city.count} plumbers</p>
+          <h3 className="font-bold text-[#1e3a5f] group-hover:text-[#2563eb] transition-colors">{city.name}</h3>
+          <p className="text-sm text-gray-500 font-medium">{city.count} electricians</p>
         </Link>
       ))}
     </div>

@@ -1,24 +1,24 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { City, Plumber, ChatState, ChatMessage as ChatMessageType } from '@/lib/types';
+import { City, Electrician, ChatState, ChatMessage as ChatMessageType } from '@/lib/types';
 import {
   createInitialState,
   processUserInput,
   addFollowupMessage,
   ProcessResult,
 } from '@/lib/chatFlow';
-import { matchPlumbers, MatchResult } from '@/lib/matcher';
+import { matchElectricians, MatchResult } from '@/lib/matcher';
 import ChatMessage from './ChatMessage';
 import ChatResults from './ChatResults';
 import ThinkingIndicator from './ThinkingIndicator';
 
 interface ChatProps {
   cities: City[];
-  plumbers: Plumber[];
+  electricians: Electrician[];
 }
 
-export default function Chat({ cities, plumbers }: ChatProps) {
+export default function Chat({ cities, electricians }: ChatProps) {
   const [chatState, setChatState] = useState<ChatState>(() => createInitialState());
   const [matchResults, setMatchResults] = useState<MatchResult | null>(null);
   const [isThinking, setIsThinking] = useState(false);
@@ -94,14 +94,14 @@ export default function Chat({ cities, plumbers }: ChatProps) {
       await new Promise(resolve => setTimeout(resolve, 600));
       setIsThinking(false);
 
-      const results = matchPlumbers(result.newState.intent, plumbers);
+      const results = matchElectricians(result.newState.intent, electricians);
       setMatchResults(results);
 
       setTimeout(() => {
         setChatState(prev => addFollowupMessage(prev));
       }, 1500);
     }
-  }, [input, isThinking, chatState, cities, plumbers]);
+  }, [input, isThinking, chatState, cities, electricians]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -125,7 +125,7 @@ export default function Chat({ cities, plumbers }: ChatProps) {
           <div className="p-6 md:p-8">
             <div className="text-center mb-6">
               <p className="text-2xl md:text-3xl font-light text-gray-800 leading-relaxed">
-                What plumbing issue can I help you with?
+                What electrical issue can I help you with?
               </p>
             </div>
 
@@ -135,15 +135,15 @@ export default function Chat({ cities, plumbers }: ChatProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Describe your plumbing problem..."
+                placeholder="Describe your electrical problem..."
                 rows={2}
-                className="w-full px-5 py-4 bg-[#fafaf8] border border-gray-200 rounded-xl text-gray-800 text-lg placeholder-gray-400 focus:outline-none focus:border-[#e5a527] focus:ring-2 focus:ring-[#e5a527]/20 transition-all resize-none"
+                className="w-full px-5 py-4 bg-[#fafaf8] border border-gray-200 rounded-xl text-gray-800 text-lg placeholder-gray-400 focus:outline-none focus:border-[#f7c948] focus:ring-2 focus:ring-[#f7c948]/20 transition-all resize-none"
                 autoFocus
               />
               <button
                 onClick={handleSubmit}
                 disabled={!input.trim()}
-                className="absolute right-3 bottom-3 p-2.5 bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white rounded-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                className="absolute right-3 bottom-3 p-2.5 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -176,7 +176,7 @@ export default function Chat({ cities, plumbers }: ChatProps) {
 
           {matchResults && !isThinking && (
             <ChatResults
-              plumbers={matchResults.plumbers}
+              electricians={matchResults.electricians}
               city={matchResults.city}
               matchedService={matchResults.matchedService}
               onStartOver={handleStartOver}
@@ -197,12 +197,12 @@ export default function Chat({ cities, plumbers }: ChatProps) {
               placeholder="Type your message..."
               rows={1}
               disabled={isThinking}
-              className="w-full px-4 py-3 pr-12 bg-[#fafaf8] border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#e5a527] focus:ring-2 focus:ring-[#e5a527]/20 transition-all resize-none disabled:opacity-50"
+              className="w-full px-4 py-3 pr-12 bg-[#fafaf8] border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#f7c948] focus:ring-2 focus:ring-[#f7c948]/20 transition-all resize-none disabled:opacity-50"
             />
             <button
               onClick={handleSubmit}
               disabled={!input.trim() || isThinking}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white rounded-lg hover:shadow-lg hover:shadow-orange-500/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

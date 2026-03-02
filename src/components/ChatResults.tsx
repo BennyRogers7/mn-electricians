@@ -1,33 +1,33 @@
 'use client';
 
 import Link from 'next/link';
-import { Plumber } from '@/lib/types';
+import { Electrician } from '@/lib/types';
 import StarRating from './StarRating';
 
 interface ChatResultsProps {
-  plumbers: Plumber[];
+  electricians: Electrician[];
   city: string;
   matchedService: string | null;
   onStartOver: () => void;
 }
 
-function CompactPlumberCard({ plumber }: { plumber: Plumber }) {
+function CompactElectricianCard({ electrician }: { electrician: Electrician }) {
   return (
-    <div className="bg-white rounded-xl border-2 border-gray-100 shadow-sm hover:shadow-md hover:border-[#e5a527] p-4 transition-all duration-200">
+    <div className="bg-white rounded-xl border-2 border-gray-100 shadow-sm hover:shadow-md hover:border-[#f7c948] p-4 transition-all duration-200">
       <div className="flex justify-between items-start mb-2">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-bold text-[#1a1a2e] truncate">{plumber.name}</h3>
-          <p className="text-gray-600 text-sm truncate">{plumber.address}</p>
+          <h3 className="text-lg font-bold text-[#1e3a5f] truncate">{electrician.name}</h3>
+          <p className="text-gray-600 text-sm truncate">{electrician.address}</p>
         </div>
         <div className="flex-shrink-0 ml-2">
-          <StarRating rating={plumber.rating} />
+          <StarRating rating={electrician.rating} />
         </div>
       </div>
 
       <div className="flex gap-2 mt-3">
         <a
-          href={`tel:${plumber.phone}`}
-          className="flex-1 bg-gradient-to-r from-[#e85d04] to-[#f77f3a] text-white text-center py-2.5 px-3 rounded-lg font-bold text-sm hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-200"
+          href={`tel:${electrician.phone}`}
+          className="flex-1 bg-gradient-to-r from-[#2563eb] to-[#3b82f6] text-white text-center py-2.5 px-3 rounded-lg font-bold text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200"
         >
           <span className="flex items-center justify-center gap-1.5">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,8 +42,8 @@ function CompactPlumberCard({ plumber }: { plumber: Plumber }) {
           </span>
         </a>
         <Link
-          href={`/profile/${plumber.slug}`}
-          className="flex-1 border-2 border-[#1a1a2e] text-[#1a1a2e] text-center py-2.5 px-3 rounded-lg font-semibold text-sm hover:bg-[#1a1a2e] hover:text-white transition-all duration-200"
+          href={`/profile/${electrician.slug}`}
+          className="flex-1 border-2 border-[#1e3a5f] text-[#1e3a5f] text-center py-2.5 px-3 rounded-lg font-semibold text-sm hover:bg-[#1e3a5f] hover:text-white transition-all duration-200"
         >
           View Profile
         </Link>
@@ -53,12 +53,12 @@ function CompactPlumberCard({ plumber }: { plumber: Plumber }) {
 }
 
 export default function ChatResults({
-  plumbers,
+  electricians,
   city,
   matchedService,
   onStartOver,
 }: ChatResultsProps) {
-  if (plumbers.length === 0) {
+  if (electricians.length === 0) {
     return (
       <div className="bg-white border border-gray-200 rounded-2xl p-6 mt-4">
         <div className="text-center">
@@ -77,21 +77,21 @@ export default function ChatResults({
               />
             </svg>
           </div>
-          <h3 className="text-lg font-bold text-[#1a1a2e] mb-2">No plumbers found in {city}</h3>
+          <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">No electricians found in {city}</h3>
           <p className="text-gray-600 mb-4">
-            We don't have any plumbers listed in this area yet. Try a nearby city or browse all
-            plumbers.
+            We don&apos;t have any electricians listed in this area yet. Try a nearby city or browse all
+            electricians.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={onStartOver}
-              className="px-6 py-2.5 bg-[#1a1a2e] text-white rounded-lg font-semibold hover:bg-[#2d2d44] transition-colors"
+              className="px-6 py-2.5 bg-[#1e3a5f] text-white rounded-lg font-semibold hover:bg-[#2d4a6f] transition-colors"
             >
               Try Different City
             </button>
             <Link
               href="/#cities"
-              className="px-6 py-2.5 border-2 border-[#e5a527] text-[#1a1a2e] rounded-lg font-semibold hover:bg-[#e5a527] hover:text-white transition-colors text-center"
+              className="px-6 py-2.5 border-2 border-[#f7c948] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#f7c948] hover:text-white transition-colors text-center"
             >
               Browse All Cities
             </Link>
@@ -104,7 +104,7 @@ export default function ChatResults({
   return (
     <div className="mt-4">
       <div className="flex items-start gap-3 mb-4">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#e5a527] to-[#e85d04] flex items-center justify-center flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#f7c948] to-[#2563eb] flex items-center justify-center flex-shrink-0">
           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
@@ -117,28 +117,28 @@ export default function ChatResults({
         <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3">
           <p className="text-[15px] text-gray-800">
             {matchedService
-              ? `Here are the top plumbers for ${matchedService} in ${city}:`
-              : `Here are the top plumbers in ${city}:`}
+              ? `Here are the top electricians for ${matchedService} in ${city}:`
+              : `Here are the top electricians in ${city}:`}
           </p>
         </div>
       </div>
 
       <div className="space-y-3 ml-11">
-        {plumbers.map((plumber) => (
-          <CompactPlumberCard key={plumber.id} plumber={plumber} />
+        {electricians.map((electrician) => (
+          <CompactElectricianCard key={electrician.id} electrician={electrician} />
         ))}
       </div>
 
       <div className="mt-4 ml-11 flex flex-wrap gap-3">
         <button
           onClick={onStartOver}
-          className="px-5 py-2.5 bg-[#fafaf8] border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#e5a527] hover:bg-white transition-all"
+          className="px-5 py-2.5 bg-[#fafaf8] border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#f7c948] hover:bg-white transition-all"
         >
           Start New Search
         </button>
         <Link
-          href={`/${plumbers[0]?.city ? plumbers[0].city.toLowerCase().replace(/\s+/g, '-') : ''}`}
-          className="px-5 py-2.5 bg-[#fafaf8] border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#e5a527] hover:bg-white transition-all"
+          href={`/${electricians[0]?.city ? electricians[0].city.toLowerCase().replace(/\s+/g, '-') : ''}`}
+          className="px-5 py-2.5 bg-[#fafaf8] border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#f7c948] hover:bg-white transition-all"
         >
           View All in {city}
         </Link>
