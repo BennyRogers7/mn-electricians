@@ -44,7 +44,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) (or port 3001/3002 if 3000 is in use - check terminal output)
 
 ## Environment Variables
 
